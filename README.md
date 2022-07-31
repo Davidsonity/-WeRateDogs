@@ -1,1 +1,1 @@
-# -WeRateDogs
+# WeRateDogs
