@@ -43,20 +43,20 @@ During the accessment for each dataset, the following issues were observed.
 
 `Quality Issues:`
 
-1.) Erroneous datatype : 'tweet_id' in all three tables and 'timestamp' in archived table
+- 1.) Erroneous datatype : 'tweet_id' in all three tables and 'timestamp' in archived table
 **archived table**
-2.) Retweets are presents: Only original ratings (no retweets) that have images should be considered
-3.) Missing information (in_reply_to_status_id, in_reply_to_user_id, retweeted_status_id, retweeted_status_user_id, retweeted_status_timestamp)
-4.) The column 'source' has unnecessary html tags.
-5.) The column 'name' has inaccurate values starting with lowercase letters : a, an, all, the, mad, not by etc, instead of 'None'
-6.) The column 'expanded_urls' has null values
-7.) urls links at the end of the column 'text'
+- 2.) Retweets are presents: Only original ratings (no retweets) that have images should be considered
+- 3.) Missing information (in_reply_to_status_id, in_reply_to_user_id, retweeted_status_id, retweeted_status_user_id, retweeted_status_timestamp)
+- 4.) The column 'source' has unnecessary html tags.
+- 5.) The column 'name' has inaccurate values starting with lowercase letters : a, an, all, the, mad, not by etc, instead of 'None'
+- 6.) The column 'expanded_urls' has null values
+- 7.) urls links at the end of the column 'text'
 **image_df table**
-8.) Drop unnecessary columns and give p1 a better names.
+- 8.) Drop unnecessary columns and give p1 a better names.
 `Tidiness issues:`
 
-9.) Redundant columns of the same category, ['doggo', 'flooter', 'pupper', 'puppo'] columns, but we only need one 'stage' column
-10.) "retweet count" and "favorite count" columns are not in the archived
+- 9.) Redundant columns of the same category, ['doggo', 'flooter', 'pupper', 'puppo'] columns, but we only need one 'stage' column
+- 10.) "retweet count" and "favorite count" columns are not in the archived
 ### 3. Cleaning Data:
 **FIRST STEP:** I made a copy of three dataframes using pandas function .copy()
 
