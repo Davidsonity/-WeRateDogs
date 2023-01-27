@@ -64,7 +64,7 @@ During the accessment for each dataset, the following issues were observed.
 - image_df_clean = image_df.copy()
 - retweet_df_clean = retweet_df.copy()
 
-### FUTHER STEPS:
+#### FUTHER STEPS:
 
 ##### For archived table
 - I converted 'tweet_id' in all three tables from int to string and 'timestamp' to pandas datetime in archived table
