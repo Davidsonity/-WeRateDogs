@@ -1,98 +1,96 @@
-# WeRateDogs
+# WeRateDogs Twitter Data Wrangling and Analysis
 
 ![ratedog](https://user-images.githubusercontent.com/96771321/215121953-9e0aadf0-b7ed-4d0a-b379-044287622972.jpg)
 > View Notebook @ https://github.com/Davidsonity/WeRateDogs/blob/main/wrangle_act.ipynb
 
-## About Dataset
-WeRateDogs is a Twitter account that rates people's dogs with a humorous comment about the dog. The data contains was scraped from twitter. For this project, the dataset was provided by Udacity ALX Data Analysis Nanodegree Program.
+## Project Overview
 
-## Project Steps Overview
-Task in this project involves:
+This project focuses on wrangling and analyzing Twitter data. The data is obtained from the WeRateDogs Twitter account and consists of various attributes such as tweet text, ratings, retweet count, favorite count, and dog stage. The goal is to gather data from different sources, assess its quality and tidiness, clean the data, and perform exploratory analysis to gain insights into the WeRateDogs tweets.
 
-- Gathering data
+## Project Structure
 
-- Assessing data
+The project directory is structured as follows:
 
-- Cleaning data
+```
+├── wrangle_act.ipynb
+├── wrangle_report.ipynb
+├── act_report.ipynb
+├── twitter_archive_master.csv
+├── twitter-archive-enhanced.csv
+└── README.md
+```
 
-- Storing data
+- `wrangle_act.ipynb`: This Jupyter Notebook contains the code for data wrangling, which includes data gathering, assessment, cleaning, and storing the cleaned data.
+- `wrangle_report.ipynb`: This Jupyter Notebook provides a detailed report on the data wrangling process, including the steps taken to gather, assess, and clean the data.
+- `act_report.ipynb`: This Jupyter Notebook contains a report on the data analysis performed on the cleaned dataset, along with insights and visualizations.
+- `twitter_archive_master.csv`: This CSV file contains the cleaned and processed data after the data wrangling phase. It serves as the final dataset used for analysis and visualizations.
+- `twitter-archive-enhanced.csv`: This CSV file is the original data provided by Udacity. It is the starting point of the data wrangling process and is referenced during the project for comparison and data assessment purposes.
+- `README.md`: This file provides an overview of the project, its structure, and instructions for running the code.
 
-- Analyzing, and visualizing data
+## Dataset
 
-- Reporting
-> data wrangling efforts \
-> data analyses and visualizations
+The dataset used in this project is the WeRateDogs Twitter data. It consists of various attributes, including tweet ID, timestamp, text, dog ratings, dog stage (e.g., doggo, floofer, pupper, puppo), retweet count, and favorite count. The dataset is originally provided in the `twitter-archive-enhanced.csv` file.
 
+## Data Wrangling
 
-### 1. Gathering Data:
-This section require three pieces of dataset to be gathered:
+The data wrangling process involves several steps, including data gathering, data assessment, and data cleaning. The `wrangle_act.ipynb` notebook contains the code for each of these steps.
 
-- twitter_archive_enhanced.csv
-> This dataset is a csv file downloaded manually from the link given `twitter_archive_enhanced.csv`
+1. Data Gathering: The data is gathered from three different sources:
+   - The `twitter-archive-enhanced.csv` file provided by Udacity
+   - The `image_predictions.tsv` file downloaded programmatically using the Python Requests library
+   - The `tweet_json.txt` file obtained from the supporting material section provided by Udacity
 
-- image_predictions.tsv
-> This dataset was downloaded using python request library from the url: `image_predictions.tsv`
+2. Data Assessment: Each dataset is assessed visually and programmatically to identify quality and tidiness issues. Issues such as missing data, incorrect data types, duplicate data, and inconsistencies are documented.
 
-- tweet_json.txt
-> This dataset is a txt file gotten from the supporting material section provided by Udacity `tweet_json.txt`
+3. Data Cleaning: The identified issues are addressed by cleaning the data. This involves operations such as fixing data types, removing duplicates, handling missing values, and resolving inconsistencies.
 
-### 2. Accessing Data:
-Each dataset gathered were read individually using python library tool Pandas. This enabled the datasets to be accessed both visually and programmatically.
+## Data Analysis
 
-During the accessment for each dataset, the following issues were observed.
+After the data is cleaned and stored in the `twitter_archive_master.csv` file, exploratory data analysis is performed in the `act_report.ipynb`
 
-`Quality Issues:`
+ notebook. The cleaned data is analyzed to gain insights and answer questions about the WeRateDogs Twitter account. The analysis includes descriptive statistics, visualizations, and correlation analysis.
 
-- 1.) Erroneous datatype : 'tweet_id' in all three tables and 'timestamp' in archived table
-**archived table**
-- 2.) Retweets are presents: Only original ratings (no retweets) that have images should be considered
-- 3.) Missing information (in_reply_to_status_id, in_reply_to_user_id, retweeted_status_id, retweeted_status_user_id, retweeted_status_timestamp)
-- 4.) The column 'source' has unnecessary html tags.
-- 5.) The column 'name' has inaccurate values starting with lowercase letters : a, an, all, the, mad, not by etc, instead of 'None'
-- 6.) The column 'expanded_urls' has null values
-- 7.) urls links at the end of the column 'text'
-**image_df table**
-- 8.) Drop unnecessary columns and give p1 a better names.
-`Tidiness issues:`
+## Results
 
-- 9.) Redundant columns of the same category, ['doggo', 'flooter', 'pupper', 'puppo'] columns, but we only need one 'stage' column
-- 10.) "retweet count" and "favorite count" columns are not in the archived
-### 3. Cleaning Data:
-**FIRST STEP:** I made a copy of three dataframes using pandas function .copy()
+The analysis of the WeRateDogs Twitter data provides the following insights:
 
-- archived_clean = archived.copy()
-- image_df_clean = image_df.copy()
-- retweet_df_clean = retweet_df.copy()
+- Distribution of numeric columns: The distributions of retweet count and favorite count are skewed, with the majority of counts falling within specific ranges.
+- Correlations between numerical columns: There is a strong positive correlation between retweet count and favorite count, indicating that tweets with higher retweet counts tend to have higher favorite counts.
+- Twitter source most used by #WeRateDogs followers: The analysis reveals that the majority of followers tweet from an iPhone.
 
-#### FUTHER STEPS:
+For more details, refer to the `act_report.ipynb` notebook.
 
-##### For archived table
-- I converted 'tweet_id' in all three tables from int to string and 'timestamp' to pandas datetime in archived table
-- I dropped the rows with values present in in_reply_to_status_id and retweeted_status_id columns
-- I dropped the columns (in_reply_to_status_id, in_reply_to_user_id, retweeted_status_id, retweeted_status_user_id, retweeted_status_timestamp)
-- I used BeautifulSoup on the 'source' column to get the texts from the tag
-- I replaced names starting with lowercase letters with 'None'
-- I dropped null values in expanded_urls
-- I removed the url link at the end of the each tweet for the column 'text'
-##### For image_df table
-- I dropped columns (p2, p2_conf, p2_dog, p3, p3_conf, p3_dog) and renamed p1, p1_conf, p1_dog to breed, onfidence and results respectively.
-##### For Tidiness issues
-- In archived_clean table, I created a new column named 'stage' and catergorise it based on doggo, flooter, pupper, puppo.
-- In archived_clean table, I dropped ['doggo', 'flooter', 'pupper', 'puppo'] columns
-- I merged retweet_df with archived_df_clean to give merged_df1_clean
-- Lastly I merged merged_df1 with image_df_clean
+## Dependencies
 
-#### 🛠 Issues and solutions
+The following dependencies are required to run the project:
 
-|Issues no	| Solution |
-| --------- | -------- |
-| 1	| Convert 'tweet_id' in all three tables from int to string and 'timestamp' to pandas datetime in archived table |
-| 2	| Drop observations reply and retweet, by deleting the rows with values present in in_reply_to_status_id and retweeted_status_id columns |
-| 3	| Drop the columns (in_reply_to_status_id, in_reply_to_user_id, retweeted_status_id, retweeted_status_user_id, retweeted_status_timestamp) |
-| 4	| Use BeautifulSoup to get the texts from the tag |
-| 5	| Replace names starting with lowercase letters with 'None' |
-| 6	| Drop null values in expanded_urls |
-| 7	| Removed the url link at the end of the each tweet for the column 'text' |
-| 8	| Drop p2, p2_conf, p2_dog, p3, p3_conf, p3_dog and rename p1, p1_conf, p1_dog |
-| 9	| Create new column 'stage', catergorise it based on doggo, flooter, pupper, puppo and lastly drop ['doggo', 'flooter', 'pupper', 'puppo'] columns |
-| 10 | Merge retweet_df with archived_df |
+- Python (version 3.x)
+- Jupyter Notebook
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+
+Ensure that these dependencies are installed in your Python environment before running the code.
+
+## Usage
+
+To replicate the project's results, follow these steps:
+
+1. Clone the project repository to your local machine.
+2. Ensure that the required dependencies are installed in your Python environment.
+3. Open and run the `wrangle_act.ipynb` notebook to perform the data wrangling process. Make sure the `twitter-archive-enhanced.csv` file is present in the project directory.
+4. Open and run the `act_report.ipynb` notebook to perform the data analysis. Ensure that the `twitter_archive_master.csv` file is present in the project directory.
+
+## File Descriptions
+
+- `wrangle_act.ipynb`: Jupyter Notebook containing the code for data wrangling.
+- `wrangle_report.ipynb`: Jupyter Notebook providing a detailed report on the data wrangling process.
+- `act_report.ipynb`: Jupyter Notebook containing the report on the data analysis.
+- `twitter_archive_master.csv`: Cleaned and processed dataset after data wrangling.
+- `twitter-archive-enhanced.csv`: Original dataset provided by Udacity.
+- `README.md`: Project overview, instructions, and information.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
